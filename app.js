@@ -37,6 +37,8 @@ const convertDbObjectToResponseObject = (dbObject) => {
   };
 };
 
+//Getting all players details
+
 app.get("/players/", async (request, response) => {
   const getPlayersQuery = `
     SELECT
@@ -51,6 +53,8 @@ app.get("/players/", async (request, response) => {
   );
 });
 
+//Getting specific player details
+
 app.get("/players/:playerId/", async (request, response) => {
   const { playerId } = request.params;
   const getPlayerQuery = `
@@ -64,6 +68,8 @@ app.get("/players/:playerId/", async (request, response) => {
   response.send(convertDbObjectToResponseObject(player));
 });
 
+//Adding a new player
+
 app.post("/players/", async (request, response) => {
   const { playerName, jerseyNumber, role } = request.body;
   const postPlayerQuery = `
@@ -74,6 +80,8 @@ app.post("/players/", async (request, response) => {
   const player = await database.run(postPlayerQuery);
   response.send("Player Added to Team");
 });
+
+//Updating existing player details
 
 app.put("/players/:playerId/", async (request, response) => {
   const { playerName, jerseyNumber, role } = request.body;
@@ -91,6 +99,8 @@ app.put("/players/:playerId/", async (request, response) => {
   await database.run(updatePlayerQuery);
   response.send("Player Details Updated");
 });
+
+//Deleting a specific player
 
 app.delete("/players/:playerId/", async (request, response) => {
   const { playerId } = request.params;
