@@ -23,7 +23,7 @@ Returns a list of all players in the team
 
 #### Response
 
-```
+``
 [
   {
     playerId: 1,
